@@ -14,6 +14,7 @@ Thumbs.db
 #Ignore files build by Visual Studio
 *.obj
 *.exe
+*.sln
 *.pdb
 *.user
 *.aps
