@@ -1,0 +1,19 @@
+﻿<Window x:Class="FaceDetectionAndRecognition.WFAbout"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:FaceDetectionAndRecognition"
+      mc:Ignorable="d" 
+      d:DesignHeight="300" d:DesignWidth="500"
+      Title="About" ResizeMode="NoResize" 
+        SizeToContent="WidthAndHeight" WindowStartupLocation="CenterScreen" IsEnabled="True">
+
+    <Grid>
+
+        <Label x:Name="lblDeveloper" Content="It was developed by Mesut Pişkin" HorizontalAlignment="Center" Margin="69,82,49,137" VerticalAlignment="Center" Height="52" FontSize="25"/>
+        <Label x:Name="lblContact" Content="mesutpiskin@outlook.com www.mesutpiskin.com" HorizontalAlignment="Center" Margin="56,139,36,80" VerticalAlignment="Center" Height="52" FontSize="18" Cursor="IBeam" IsEnabled="False"/>
+        <Label x:Name="lblPowered" Content="EmguCV, Csharp WPF APP" HorizontalAlignment="Center" Margin="56,196,62,23" VerticalAlignment="Center" Height="52" FontSize="25" Foreground="Red"/>
+
+    </Grid>
+</Window>
