@@ -1,5 +1,4 @@
-# Face Detection and Recognition
-Face detection and recognition with EmguCV
+#Face detection and recognition with EmguCV
 
 #EmguCV ile Yüz Tespiti ve Yüz Tanıma
 
