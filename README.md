@@ -1,7 +1,9 @@
-# FaceDetectionAndRecognition
-Face detection and recognition with OpenCV, EmguCV
+# Face Detection and Recognition
+Face detection and recognition with EmguCV
 
-**Gereksinimler**
+#EmguCV ile Yüz Tespiti ve Yüz Tanıma
+
+**Gereksinimler** - **Requirements**
 
 [EmguCV 2.2.1](https://sourceforge.net/projects/emgucv/files/emgucv/2.2.1/)
 
