@@ -1,10 +1,8 @@
-#Face detection and recognition with EmguCV
+#Face detection and recognition with EmguCV - EmguCV ile Yüz Tespiti ve Yüz Tanıma
 
-#EmguCV ile Yüz Tespiti ve Yüz Tanıma
+**Requirements**
 
-**Gereksinimler** - **Requirements**
-
-[EmguCV 2.2.1](https://sourceforge.net/projects/emgucv/files/emgucv/2.2.1/)
+   - [EmguCV 2.2.1](https://sourceforge.net/projects/emgucv/files/emgucv/2.2.1/)
 
 
 **Youtube Video**
