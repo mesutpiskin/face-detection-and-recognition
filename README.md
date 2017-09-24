@@ -1,7 +1,8 @@
-#Face detection and recognition with EmguCV - EmguCV ile Yüz Tespiti ve Yüz Tanıma
+# Face Detection and Recognition with EmguCV
+# EmguCV ile Yüz Tespiti ve Yüz Tanıma
 
 **Requirements**
-
+   - Visual Studio 2010 or Later Version
    - [EmguCV 2.2.1](https://sourceforge.net/projects/emgucv/files/emgucv/2.2.1/)
 
 
