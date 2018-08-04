@@ -1,5 +1,13 @@
-# Face Detection and Recognition with EmguCV
-# EmguCV ile Yüz Tespiti ve Yüz Tanıma
+### EN:Face Detection and Recognition with EmguCV
+### TR:EmguCV ile Yüz Tespiti ve Yüz Tanıma
+
+**Algorithm**
+   - [Haar Cascade Classifier](http://mesutpiskin.com/blog/321.html)
+   - [Eigenfaces, Fisherfaces, LBPH](http://mesutpiskin.com/blog/opencv-yuz-tanima-eigenfaces-fisherfaces-lbph.html)
+
+
+![alg](https://svgshare.com/i/7fc.svg)
+
 
 **Requirements**
    - Visual Studio 2010 or Later Version
