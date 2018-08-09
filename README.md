@@ -1,5 +1,9 @@
-### EN:Face Detection and Recognition with EmguCV
-### TR:EmguCV ile Yüz Tespiti ve Yüz Tanıma
+![net](https://img.shields.io/badge/.NET-4-Green.svg)
+![C#](https://img.shields.io/badge/language-Csharp-blue.svg)
+![Wrapper](https://img.shields.io/badge/wrapper-EmguCV-purple.svg)
+![UI](https://img.shields.io/badge/UI-WPF-red.svg)
+
+# Face Detection and Recognition with EmguCV
 
 **Algorithm**
    - [Haar Cascade Classifier](http://mesutpiskin.com/blog/321.html)
