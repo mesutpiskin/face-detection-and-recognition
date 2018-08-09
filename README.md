@@ -5,7 +5,7 @@
 
 # Face Detection and Recognition with EmguCV
 
-**Algorithm**
+**How to works**
    - [Haar Cascade Classifier](http://mesutpiskin.com/blog/321.html)
    - [Eigenfaces, Fisherfaces, LBPH](http://mesutpiskin.com/blog/opencv-yuz-tanima-eigenfaces-fisherfaces-lbph.html)
 
@@ -14,7 +14,7 @@
 
 
 **Requirements**
-   - Visual Studio 2010 or Later Version
+   - [Visual Studio](https://visualstudio.microsoft.com/)
    - [EmguCV 2.2.1](https://sourceforge.net/projects/emgucv/files/emgucv/2.2.1/)
 
 
