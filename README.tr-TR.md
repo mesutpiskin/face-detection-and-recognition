@@ -1,20 +1,20 @@
-English | [Türkçe](./README.tr-TR.md)
+[English](./README.md) | Türkçe
 
 <div align="center">
 
 <img width="300" src="./static/head.png"/>
 
-<h1 align="center">Face Detection and Recognition with C# EmguCV</h1>
+<h1 align="center">C# EmguCV ile Yüz Tespiti ve Yüz Tanıma</h1>
 
 </div>
 
 
 
-### What is Emgu CV?
+### EmguCV Nedir?
 
 Emgu CV is a cross platform .Net wrapper to the OpenCV image processing library. Allowing OpenCV functions to be called from .NET compatible languages such as C#, VB, VC++, IronPython etc. The wrapper can be compiled by Visual Studio, Xamarin Studio and Unity, it can run on Windows, Linux, Mac OS X, iOS, Android and Windows Phone.
 
-### Algorithms
+### Algoritmalar
 
 - Blog post for [Haar Cascade Classifier](http://mesutpiskin.com/blog/321.html)
 - Blog post for [Eigenfaces, Fisherfaces, LBPH](http://mesutpiskin.com/blog/opencv-yuz-tanima-eigenfaces-fisherfaces-lbph.html)
@@ -34,13 +34,13 @@ The **_Viola–Jones_** object detection framework is the first object detection
 
 <img width="500" src="https://preview.ibb.co/cxdBpp/Screen_Shot_2018_09_11_at_16_45_51.png"/>
 
-### Requirements
+### Gereksinimler
 
 - [Visual Studio](https://visualstudio.microsoft.com/)
-- Min [EmguCV 2.2.1](https://sourceforge.net/projects/emgucv/files/emgucv/2.2.1/)
+- Minimum [EmguCV 2.2.1](https://sourceforge.net/projects/emgucv/files/emgucv/2.2.1/)
 
 
-### Hot to Run?
+### Nasıl Çalıştırlır?
 
 - Download or clone project
 
