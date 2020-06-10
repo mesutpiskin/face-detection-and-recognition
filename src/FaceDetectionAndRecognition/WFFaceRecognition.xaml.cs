@@ -162,7 +162,12 @@ namespace FaceDetectionAndRecognition
             string line;
             FaceData faceInstance = null;
 
-            //split face text file
+            // Create empty directory / file for face data if it doesn't exist
+            if (!Directory.Exists(Config.FacePhotosPath))
+            {
+                Directory.CreateDirectory(Config.FacePhotosPath);
+            }
+
             if (!File.Exists(Config.FaceListTextFile))
             {
                 string text = "Cannot find face data file:\n\n";
@@ -179,6 +184,7 @@ namespace FaceDetectionAndRecognition
                         break;
                 }
             }
+
             StreamReader reader = new StreamReader(Config.FaceListTextFile);
             int i = 0;
             while ((line = reader.ReadLine()) != null)
