@@ -11,6 +11,8 @@ using System.Timers;
 using System.Windows.Media.Imaging;
 using System.Windows.Threading;
 using System.Runtime.CompilerServices;
+using Emgu.CV.Face;
+using Emgu.CV.Util;
 using Microsoft.Win32;
 
 namespace FaceDetectionAndRecognition
@@ -25,8 +27,11 @@ namespace FaceDetectionAndRecognition
         private Image<Bgr, Byte> bgrFrame = null;
         private Image<Gray, Byte> detectedFace = null;
         private List<FaceData> faceList = new List<FaceData>();
-        private List<Image<Gray, Byte>> imageList = new List<Image<Gray, byte>>();
-        private List<string> lList = new List<string>();
+        private VectorOfMat imageList = new VectorOfMat();
+        private List<string> nameList = new List<string>();
+        private VectorOfInt labelList = new VectorOfInt();
+
+        private EigenFaceRecognizer recognizer;
         private Timer captureTimer;
         #region FaceName
         private string faceName;
@@ -137,9 +142,6 @@ namespace FaceDetectionAndRecognition
                 this.Title = openDialog.FileName;
                 return;
             }
-
-
-
         }
         #endregion
 
@@ -153,6 +155,8 @@ namespace FaceDetectionAndRecognition
             FaceData faceInstance = null;
             //split face text file
             StreamReader reader = new StreamReader(Config.FaceListTextFile);
+
+            int i = 0;
             while ((line = reader.ReadLine()) != null)
             {
                 string[] lineParts = line.Split(':');
@@ -163,10 +167,16 @@ namespace FaceDetectionAndRecognition
             }
             foreach (var face in faceList)
             {
-                imageList.Add(face.FaceImage);
-                lList.Add(face.PersonName);
+                imageList.Push(face.FaceImage.Mat);
+                nameList.Add(face.PersonName);
+                labelList.Push(new[] { i++ });
             }
             reader.Close();
+
+            // Train recogniser
+            recognizer = new EigenFaceRecognizer(imageList.Size);
+            recognizer.Train(imageList, labelList);
+
         }
 
         private void ProcessFrame()
@@ -179,7 +189,7 @@ namespace FaceDetectionAndRecognition
                 {//for emgu cv bug
                     Image<Gray, byte> grayframe = bgrFrame.Convert<Gray, byte>();
 
-                    Rectangle[] faces = haarCascade.DetectMultiScale(grayframe, 1.2, 10, new System.Drawing.Size(20, 20), new System.Drawing.Size(80, 80));
+                    Rectangle[] faces = haarCascade.DetectMultiScale(grayframe, 1.2, 10, new System.Drawing.Size(50, 50), new System.Drawing.Size(200, 200));
 
                     //detect face
                     FaceName = "No face detected";
@@ -201,15 +211,14 @@ namespace FaceDetectionAndRecognition
             }
         }
 
+
         private void FaceRecognition()
         {
-            if (imageList.ToArray().Length != 0)
+            if (imageList.Size != 0)
             {
-                MCvTermCriteria termCrit = new MCvTermCriteria(lList.Count, 0.001);
                 //Eigen Face Algorithm
-                EigenObjectRecognizer recognizer = new EigenObjectRecognizer(imageList.ToArray(), lList.ToArray(), 3000, ref termCrit);
-                string faceName = recognizer.Recognize(detectedFace.Resize(100, 100, Emgu.CV.CvEnum.INTER.CV_INTER_CUBIC));
-                FaceName = faceName;
+                FaceRecognizer.PredictionResult result = recognizer.Predict(detectedFace.Resize(100, 100, Inter.Cubic));
+                FaceName = nameList[result.Label]; 
                 CameraCaptureFace = detectedFace.ToBitmap();
             }
             else
