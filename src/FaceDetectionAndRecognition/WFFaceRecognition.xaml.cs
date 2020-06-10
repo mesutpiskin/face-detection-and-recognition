@@ -153,9 +153,25 @@ namespace FaceDetectionAndRecognition
             faceList.Clear();
             string line;
             FaceData faceInstance = null;
-            //split face text file
-            StreamReader reader = new StreamReader(Config.FaceListTextFile);
 
+            //split face text file
+            if (!File.Exists(Config.FaceListTextFile))
+            {
+                string text = "Cannot find face data file:\n\n";
+                text += Config.FaceListTextFile + "\n\n";
+                text += "If this is your first time running the app, an empty file will be created for you.";
+                MessageBoxResult result = MessageBox.Show(text, "Warning",
+                    MessageBoxButton.OK, MessageBoxImage.Warning);
+                switch (result)
+                {
+                    case MessageBoxResult.OK:
+                        String dirName = Path.GetDirectoryName(Config.FaceListTextFile);
+                        Directory.CreateDirectory(dirName);
+                        File.Create(Config.FaceListTextFile).Close();
+                        break;
+                }
+            }
+            StreamReader reader = new StreamReader(Config.FaceListTextFile);
             int i = 0;
             while ((line = reader.ReadLine()) != null)
             {
@@ -174,8 +190,11 @@ namespace FaceDetectionAndRecognition
             reader.Close();
 
             // Train recogniser
-            recognizer = new EigenFaceRecognizer(imageList.Size);
-            recognizer.Train(imageList, labelList);
+            if (imageList.Size > 0)
+            {
+                recognizer = new EigenFaceRecognizer(imageList.Size);
+                recognizer.Train(imageList, labelList);
+            }
 
         }
 
