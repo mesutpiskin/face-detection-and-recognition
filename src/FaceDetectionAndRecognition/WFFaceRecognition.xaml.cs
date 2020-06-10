@@ -149,6 +149,14 @@ namespace FaceDetectionAndRecognition
         public void GetFacesList()
         {
             //haar cascade classifier
+            if (!File.Exists(Config.HaarCascadePath))
+            {
+                string text = "Cannot find Haar cascade data file:\n\n";
+                text += Config.HaarCascadePath;
+                MessageBoxResult result = MessageBox.Show(text, "Error",
+                       MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+
             haarCascade = new CascadeClassifier(Config.HaarCascadePath);
             faceList.Clear();
             string line;
