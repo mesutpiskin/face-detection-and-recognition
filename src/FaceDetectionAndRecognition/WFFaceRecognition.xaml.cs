@@ -127,7 +127,7 @@ namespace FaceDetectionAndRecognition
             writer.WriteLine(String.Format("face{0}:{1}", (faceList.Count + 1), personName));
             writer.Close();
             GetFacesList();
-            MessageBox.Show("Succesfull.");
+            MessageBox.Show("Successful.");
         }
         private void OpenVideoFile_Click(object sender, RoutedEventArgs e)
         {
