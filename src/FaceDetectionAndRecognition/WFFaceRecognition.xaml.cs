@@ -20,8 +20,8 @@ namespace FaceDetectionAndRecognition
     {
         #region Properties
         public event PropertyChangedEventHandler PropertyChanged;
-        private Capture videoCapture;
-        private HaarCascade haarCascade;
+        private VideoCapture videoCapture;
+        private CascadeClassifier haarCascade;
         private Image<Bgr, Byte> bgrFrame = null;
         private Image<Gray, Byte> detectedFace = null;
         private List<FaceData> faceList = new List<FaceData>();
@@ -92,10 +92,10 @@ namespace FaceDetectionAndRecognition
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             GetFacesList();
-            videoCapture = new Capture(Config.ActiveCameraIndex);
-            videoCapture.SetCaptureProperty(Emgu.CV.CvEnum.CAP_PROP.CV_CAP_PROP_FPS, 30);
-            videoCapture.SetCaptureProperty(Emgu.CV.CvEnum.CAP_PROP.CV_CAP_PROP_FRAME_HEIGHT, 450);
-            videoCapture.SetCaptureProperty(Emgu.CV.CvEnum.CAP_PROP.CV_CAP_PROP_FRAME_WIDTH, 370);
+            videoCapture = new VideoCapture(Config.ActiveCameraIndex);
+            videoCapture.SetCaptureProperty(CapProp.Fps, 30);
+            videoCapture.SetCaptureProperty(CapProp.FrameHeight, 450);
+            videoCapture.SetCaptureProperty(CapProp.FrameWidth, 370);
             captureTimer.Start();
         }
         private void CaptureTimer_Elapsed(object sender, ElapsedEventArgs e)
@@ -115,7 +115,7 @@ namespace FaceDetectionAndRecognition
                 return;
             }
             //Save detected face
-            detectedFace = detectedFace.Resize(100, 100, Emgu.CV.CvEnum.INTER.CV_INTER_CUBIC);
+            detectedFace = detectedFace.Resize(100, 100, Inter.Cubic);
             detectedFace.Save(Config.FacePhotosPath +"face"+ (faceList.Count + 1) + Config.ImageFileExtension);
             StreamWriter writer = new StreamWriter(Config.FaceListTextFile, true);
             string personName = Microsoft.VisualBasic.Interaction.InputBox("Your Name");
@@ -132,7 +132,7 @@ namespace FaceDetectionAndRecognition
                 captureTimer.Stop();
                 videoCapture.Dispose();
 
-                videoCapture = new Capture(openDialog.FileName);
+                videoCapture = new VideoCapture(openDialog.FileName);
                 captureTimer.Start();
                 this.Title = openDialog.FileName;
                 return;
@@ -147,7 +147,7 @@ namespace FaceDetectionAndRecognition
         public void GetFacesList()
         {
             //haar cascade classifier
-            haarCascade = new HaarCascade(Config.HaarCascadePath);
+            haarCascade = new CascadeClassifier(Config.HaarCascadePath);
             faceList.Clear();
             string line;
             FaceData faceInstance = null;
@@ -171,21 +171,22 @@ namespace FaceDetectionAndRecognition
 
         private void ProcessFrame()
         {
-            bgrFrame = videoCapture.QueryFrame();
-                  
+            bgrFrame = videoCapture.QueryFrame().ToImage<Bgr, Byte>();
+
             if (bgrFrame != null)
             {
                 try
                 {//for emgu cv bug
                     Image<Gray, byte> grayframe = bgrFrame.Convert<Gray, byte>();
-                    //detect face
-                    MCvAvgComp[][] faces = grayframe.DetectHaarCascade(haarCascade, 1.2, 10, HAAR_DETECTION_TYPE.DO_CANNY_PRUNING, new System.Drawing.Size(20, 20));
 
+                    Rectangle[] faces = haarCascade.DetectMultiScale(grayframe, 1.2, 10, new System.Drawing.Size(20, 20), new System.Drawing.Size(80, 80));
+
+                    //detect face
                     FaceName = "No face detected";
-                    foreach (var face in faces[0])
+                    foreach (var face in faces)
                     {
-                        bgrFrame.Draw(face.rect, new Bgr(255, 255, 0), 2);
-                        detectedFace = bgrFrame.Copy(face.rect).Convert<Gray, byte>();
+                        bgrFrame.Draw(face, new Bgr(255, 255, 0), 2);
+                        detectedFace = bgrFrame.Copy(face).Convert<Gray, byte>();
                         FaceRecognition();
                         break;
                     }
