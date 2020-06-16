@@ -120,6 +120,11 @@
   <ItemGroup>
     <None Include="Resources\ico.ico" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\haarcascade_frontalface_default.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\Emgu.CV.runtime.windows.4.3.0.3890\build\Emgu.CV.runtime.windows.targets" Condition="Exists('..\packages\Emgu.CV.runtime.windows.4.3.0.3890\build\Emgu.CV.runtime.windows.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
